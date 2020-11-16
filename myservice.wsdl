@@ -1,0 +1,131 @@
+<definitions xmlns:tns="localhost.wsdl" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsd1="localhost.xsd" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns="http://schemas.xmlsoap.org/wsdl/" name="toto" targetNamespace="localhost.wsdl">
+<!--  definition of datatypes  -->
+<types>
+<schema xmlns="http://www.w3.org/2000/10/XMLSchema" targetNamespace="localhost.xsd">
+<element name="rentalDate">
+<complexType>
+<all>
+<element name="value" type="string"/>
+</all>
+</complexType>
+</element>
+<element name="cancellation">
+<complexType>
+<all>
+<element name="value" type="string"/>
+</all>
+</complexType>
+</element>
+<element name="numberOfNights">
+<complexType>
+<all>
+<element name="value" type="int"/>
+</all>
+</complexType>
+</element>
+<element name="numberOfRoom">
+<complexType>
+<all>
+<element name="value" type="int"/>
+</all>
+</complexType>
+</element>
+<element name="idHotel">
+<complexType>
+<all>
+<element name="value" type="int"/>
+</all>
+</complexType>
+</element>
+<element name="reservation">
+<complexType>
+<all>
+<element name="value" type="string"/>
+</all>
+</complexType>
+</element>
+<element name="information">
+  <complexType>
+    <sequence>
+      <element name="id" type="int"/>
+      <element name="name" type="string"/>
+    </sequence>
+  </complexType>
+</element>
+</schema>
+</types>
+<!--  response messages  -->
+<message name="returns_information">
+<part name="hotels" type="xsd:information[]"/>
+</message>
+<message name="returns_reservation">
+<part name="reservation" type="xsd:reservation"/>
+</message>
+<message name="returns_cancellation">
+<part name="cancellation" type="xsd:cancellation"/>
+</message>
+<!--  request messages  -->
+<message name="getHotels">
+<part name="rentalDate" type="xsd:rentalDate"/>
+<part name="numberOfNights" type="xsd:numberOfNights"/>
+<part name="numberOfRoom" type="xsd:numberOfRoom"/>
+</message>
+<message name="reserverHotel">
+<part name="idHotel" type="xsd:idHotel"/>
+</message>
+<message name="cancelReservation">
+<part name="idHotel" type="xsd:idHotel"/>
+</message>
+<!--  server's services  -->
+<portType name="HotelReservationService">
+<operation name="getHotels">
+<input message="tns:getHotels"/>
+<output message="tns:returns_information"/>
+</operation>
+<operation name="reserverHotel">
+<input message="tns:reserverHotel"/>
+<output message="tns:returns_reservation"/>
+</operation>
+<operation name="cancelReservation">
+<input message="tns:cancelReservation"/>
+<output message="tns:returns_cancellation"/>
+</operation>
+</portType>
+<!--  server encoding  -->
+<binding name="HotelReservationService_webservices" type="tns:HotelReservationService">
+<soap:binding style="rpc" transport="http://schemas.xmlsoap.org/soap/http"/>
+<operation name="getHotels">
+<soap:operation soapAction="urn:xmethods-delayed-quotes#getHotels"/>
+<input>
+<soap:body use="encoded" namespace="urn:xmethods-delayed-quotes" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/>
+</input>
+<output>
+<soap:body use="encoded" namespace="urn:xmethods-delayed-quotes" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/>
+</output>
+</operation>
+<operation name="reserverHotel">
+<soap:operation soapAction="urn:xmethods-delayed-quotes#reserverHotel"/>
+<input>
+<soap:body use="encoded" namespace="urn:xmethods-delayed-quotes" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/>
+</input>
+<output>
+<soap:body use="encoded" namespace="urn:xmethods-delayed-quotes" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/>
+</output>
+</operation>
+<operation name="cancelReservation">
+<soap:operation soapAction="urn:xmethods-delayed-quotes#cancelReservation"/>
+<input>
+<soap:body use="encoded" namespace="urn:xmethods-delayed-quotes" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/>
+</input>
+<output>
+<soap:body use="encoded" namespace="urn:xmethods-delayed-quotes" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/>
+</output>
+</operation>
+</binding>
+<!--  access to service provider  -->
+<service name="service">
+<port name="port" binding="HotelReservationService_webservices">
+<soap:address location="http://localhost:8000/wsdl"/>
+</port>
+</service>
+</definitions>
