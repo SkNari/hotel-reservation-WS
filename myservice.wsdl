@@ -33,7 +33,7 @@
 <element name="idHotel">
 <complexType>
 <all>
-<element name="value" type="int"/>
+<element name="value" type="string"/>
 </all>
 </complexType>
 </element>
@@ -44,11 +44,19 @@
 </all>
 </complexType>
 </element>
+<element name="idReservation">
+<complexType>
+<all>
+<element name="value" type="string"/>
+</all>
+</complexType>
+</element>
 <element name="information">
   <complexType>
     <sequence>
-      <element name="id" type="int"/>
+      <element name="identifier" type="string"/>
       <element name="name" type="string"/>
+      <element name="rooms" type="string"/>
     </sequence>
   </complexType>
 </element>
@@ -72,9 +80,12 @@
 </message>
 <message name="reserverHotel">
 <part name="idHotel" type="xsd:idHotel"/>
+<part name="name" type="xsd:name"/>
+<part name="surname" type="xsd:surname"/>
+<part name="rentalDate" type="xsd:rentalDate"/>
 </message>
 <message name="cancelReservation">
-<part name="idHotel" type="xsd:idHotel"/>
+<part name="idReservation" type="xsd:idReservation"/>
 </message>
 <!--  server's services  -->
 <portType name="HotelReservationService">
@@ -125,7 +136,7 @@
 <!--  access to service provider  -->
 <service name="service">
 <port name="port" binding="HotelReservationService_webservices">
-<soap:address location="http://localhost:8000/wsdl"/>
+<soap:address location="http://localhost:8081/wsdl"/>
 </port>
 </service>
 </definitions>
