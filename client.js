@@ -1,6 +1,6 @@
 var soap = require('soap');
 var url = 'http://localhost:8081/wsdl?wsdl';
-var args = {idReservation: "toto"};
+var args = {toto: "toto"};
 const axios = require('axios');
 
 var params = {
@@ -14,10 +14,18 @@ var params = {
 
 }
 
+var soapHeader = {
+
+  token : "toto"
+
+};
+
 //axios.post("http://localhost:8082/bookings",params);
 
 soap.createClient(url,function(err,client) {
-    client.cancelReservation(args,function(err,result) {
+    client.addSoapHeader(soapHeader);
+    client.reserverHotel(args,function(err,result) {
         console.log(result);
+        console.log(client.describe());
       });
 });

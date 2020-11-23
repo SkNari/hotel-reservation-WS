@@ -60,6 +60,13 @@
     </sequence>
   </complexType>
 </element>
+<element name="authHeader">
+  <complexType>
+    <sequence>
+      <element name="token" type="string"/>
+    </sequence>
+  </complexType>
+</element>
 </schema>
 </types>
 <!--  response messages  -->
@@ -125,12 +132,12 @@
 </operation>
 <operation name="cancelReservation">
 <soap:operation soapAction="urn:xmethods-delayed-quotes#cancelReservation"/>
-<input>
+<input headerDescription="tns:authHeader">
 <soap:body use="encoded" namespace="urn:xmethods-delayed-quotes" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/>
 </input>
 <output>
 <soap:body use="encoded" namespace="urn:xmethods-delayed-quotes" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/>
-</output>
+</output> 
 </operation>
 </binding>
 <!--  access to service provider  -->

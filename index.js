@@ -47,7 +47,9 @@ var hotelReservationService = {
                 reservation: "Yes "+args.idHotel
             };
         },
-        cancelReservation : function(args,callback) {
+        cancelReservation : function(args,callback,headers) {
+
+          console.log(headers);
 
           axios.delete(url+"/booking/"+args.idReservation).then(resp=>{
 
@@ -55,7 +57,6 @@ var hotelReservationService = {
 
           }).catch(error => {
 
-            console.log(error);
             callback({cancellation:"false"});
 
           })
