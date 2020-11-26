@@ -87,9 +87,9 @@
 </message>
 <message name="reserverHotel">
 <part name="idHotel" type="xsd:idHotel"/>
-<part name="name" type="xsd:name"/>
-<part name="surname" type="xsd:surname"/>
 <part name="rentalDate" type="xsd:rentalDate"/>
+<part name="numberOfNights" type="xsd:numberOfNights"/>
+<part name="numberOfRoom" type="xsd:numberOfRoom"/>
 </message>
 <message name="cancelReservation">
 <part name="idReservation" type="xsd:idReservation"/>
